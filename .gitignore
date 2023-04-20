@@ -1,3 +1,5 @@
 #Insert file to be ignored
 # *.extension to exclude all the files
 # filename.extension to exclude a single file
+
+App_Data/

@@ -1,0 +1,76 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="topBar">
+        </div>
+        <div class="grid-container">
+            <div id="sideBar" class="grid-item">
+                <asp:LoginView ID="LoginView1" runat="server">
+                    <AnonymousTemplate>
+                        <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="AnonymousSiteMap" runat="server" />
+                        <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
+                            <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                            <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                            <ParentNodeStyle Font-Bold="False" />
+                            <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                        </asp:TreeView>
+                    </AnonymousTemplate>
+                    <RoleGroups>
+                        <asp:RoleGroup Roles="customer">
+                            <ContentTemplate>
+                                <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="CustomerSitemap" runat="server" />
+                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
+                                    <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                                    <ParentNodeStyle Font-Bold="False" />
+                                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                                </asp:TreeView>
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                        <asp:RoleGroup Roles="picker">
+                            <ContentTemplate>
+                                <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="PickerSiteMap" runat="server" />
+                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
+                                    <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                                    <ParentNodeStyle Font-Bold="False" />
+                                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                                </asp:TreeView>
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                        <asp:RoleGroup Roles="admin">
+                            <ContentTemplate>
+                                <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="AdminSiteMap" runat="server" />
+                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
+                                    <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+                                    <ParentNodeStyle Font-Bold="False" />
+                                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                                </asp:TreeView>
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                    </RoleGroups>
+                </asp:LoginView>
+                <asp:LoginStatus ID="LoginStatus1" runat="server" />
+            </div>
+            <div id="mainContent" class="grid-item">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div id="footer">
+            <a href="mailto:test@via.dk">DEVELOPER: Iacopo Ermacora and Merlin Meyer</a>
+        </div>
+    </form>
+</body>
+</html>
