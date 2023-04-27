@@ -3,3 +3,4 @@
 # filename.extension to exclude a single file
 
 App_Data/
+Bin/

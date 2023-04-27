@@ -3,9 +3,7 @@
   <siteMapNode>
     <siteMapNode url="Users/user_profile.aspx" title="Profile"  description="" />
 
-    <siteMapNode url="Orders/orders.aspx" title="Orders"  description="">
-      <siteMapNode url="Orders/order_info.aspx" title="Orders"  description="" />
-    </siteMapNode>
+    <siteMapNode url="Orders/orders.aspx" title="Orders"  description=""/>
 
     <siteMapNode url="Products/products.aspx" title="Products"  description="" />
   </siteMapNode>

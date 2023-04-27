@@ -36,7 +36,7 @@ li a:hover:not(.active) {
 #sideBar {
     background-color:#ff6A00;
     height: 90vh;
-    padding:0px;
+    padding: 0px;
     max-width: 20vw;
     min-width: 20vw;
     display:inline-block;
@@ -44,11 +44,26 @@ li a:hover:not(.active) {
 }
 
 #mainContent {
-    background-color:lightgrey;
     height: 90vh;
-    padding:0px;
-    max-width: 80vw;
+    padding: 0px;
+    max-width: 78vw;
     min-width: 78vw;
+    display:inline-block;
+    vertical-align: top;
+}
+
+#image-block {
+    padding:0px;
+    max-width: 18vw;
+    min-width: 18vw;
+    display:inline-block;
+    vertical-align: top;
+}
+
+#data-block {
+    padding:0px;
+    max-width: 58vw;
+    min-width: 58vw;
     display:inline-block;
     vertical-align: top;
 }

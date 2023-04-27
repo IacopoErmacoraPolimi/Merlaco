@@ -7,9 +7,7 @@
       <siteMapNode url="Users/Admin/users.aspx?u=customers" title="Customers"  description="" />
     </siteMapNode>
         
-    <siteMapNode url="Orders/orders.aspx" title="Orders"  description="">
-      <siteMapNode url="Orders/order_info.aspx" title="Orders"  description="" />
-    </siteMapNode>
+    <siteMapNode url="Orders/orders.aspx" title="Orders"  description=""/>
 
     <siteMapNode url="Products/products.aspx" title="Products"  description="" />
   </siteMapNode>

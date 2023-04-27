@@ -143,8 +143,6 @@
             </tr>
         </SelectedItemTemplate>
     </asp:ListView>
-    <asp:SqlDataSource ID="Order_info_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Order].[product_bar_code], [quantity], [Product].[place], [Product].[alternative], [Order].[picked]
-FROM [Order], [Product]
-WHERE [Order].[product_bar_code] = [Product].[barcode]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="Order_info_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ></asp:SqlDataSource>
 </asp:Content>
 

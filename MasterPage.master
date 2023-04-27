@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,10 +14,15 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
+
         <ul>
-          <li><a href="Default.aspx">Merlaco</a></li>
-          <li style="float:right"><a class="active" href="cart/cart.aspx"><i class="bi bi-basket"></i></a></li>
-          <li style="float:right"><asp:LoginStatus ID="LoginStatus2" runat="server" /></li>
+            <li><a href="Default.aspx">Merlaco</a></li>
+            <li style="float: right"><a class="active" href="cart/cart.aspx"><i class="bi bi-basket"></i></a></li>
+            <li style="float: right">
+                <asp:LoginStatus ID="LoginStatus2" runat="server" />
+            </li>
         </ul>
         <div class="inline-div">
             <div id="sideBar">
