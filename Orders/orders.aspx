@@ -18,6 +18,9 @@
                 <td>
                     <asp:Label ID="N_itemsLabel" runat="server" Text='<%# Eval("N_items") %>' />
                 </td>
+                <td>
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
+                </td>
             </tr>
         </AlternatingItemTemplate>
         <EditItemTemplate>
@@ -37,6 +40,9 @@
                 </td>
                 <td>
                     <asp:TextBox ID="N_itemsTextBox" runat="server" Text='<%# Bind("N_items") %>' />
+                </td>
+                <td>
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
                 </td>
             </tr>
         </EditItemTemplate>
@@ -65,6 +71,9 @@
                 <td>
                     <asp:TextBox ID="N_itemsTextBox" runat="server" Text='<%# Bind("N_items") %>' />
                 </td>
+                <td>
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
+                </td>
             </tr>
         </InsertItemTemplate>
         <ItemTemplate>
@@ -81,6 +90,9 @@
                 <td>
                     <asp:Label ID="N_itemsLabel" runat="server" Text='<%# Eval("N_items") %>' />
                 </td>
+                <td>
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
+                </td>
             </tr>
         </ItemTemplate>
         <LayoutTemplate>
@@ -93,6 +105,7 @@
                                 <th runat="server">picker</th>
                                 <th runat="server">picked</th>
                                 <th runat="server">N_items</th>
+                                <th runat="server">See Details</th>
                             </tr>
                             <tr id="itemPlaceholder" runat="server">
                             </tr>
@@ -124,12 +137,12 @@
                 <td>
                     <asp:Label ID="N_itemsLabel" runat="server" Text='<%# Eval("N_items") %>' />
                 </td>
+                <td>
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
+                </td>
             </tr>
         </SelectedItemTemplate>
     </asp:ListView>
-    <asp:SqlDataSource ID="Orders_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Order].[order_number], [Order_picker].[picker], [Order_picker].[picked], SUM([Order].[quantity]) as N_items
-FROM [Order], [Order_picker]
-WHERE [Order].[order_number] = [Order_picker].[order_number]
-GROUP BY [Order].[order_number],  [Order_picker].[picker], [Order_picker].[picked]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="Orders_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
 </asp:Content>
 

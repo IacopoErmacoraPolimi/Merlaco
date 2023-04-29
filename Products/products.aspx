@@ -5,21 +5,25 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ListView ID="ListView1" runat="server" DataSourceID="Products_datasource" GroupItemCount="3">
         <AlternatingItemTemplate>
-            <td runat="server" style="background-color: #FAFAD2;color: #284775;">name:
+            <td runat="server" style="background-color: #FAFAD2;color: #284775;">
+                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
+                <br />name:
                 <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                <br />picture:
-                <asp:Label ID="pictureLabel" runat="server" Text='<%# Eval("picture") %>' />
                 <br />price:
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
+                <br />Details:
+                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
                 <br /></td>
         </AlternatingItemTemplate>
         <EditItemTemplate>
-            <td runat="server" style="background-color: #FFCC66;color: #000080;">name:
+            <td runat="server" style="background-color: #FFCC66;color: #000080;">
+                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
+                <br />name:
                 <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
-                <br />picture:
-                <asp:TextBox ID="pictureTextBox" runat="server" Text='<%# Bind("picture") %>' />
                 <br />price:
                 <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price") %>' />
+                <br />Details:
+                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
                 <br />
                 <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
                 <br />
@@ -42,12 +46,14 @@
             </tr>
         </GroupTemplate>
         <InsertItemTemplate>
-            <td runat="server" style="">name:
+            <td runat="server" style="">
+                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
+                <br />name:
                 <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
-                <br />picture:
-                <asp:TextBox ID="pictureTextBox" runat="server" Text='<%# Bind("picture") %>' />
                 <br />price:
                 <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price") %>' />
+                <br />Details:
+                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
                 <br />
                 <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
                 <br />
@@ -55,12 +61,14 @@
                 <br /></td>
         </InsertItemTemplate>
         <ItemTemplate>
-            <td runat="server" style="background-color: #FFFBD6;color: #333333;">name:
+            <td runat="server" style="background-color: #FFFBD6;color: #333333;">
+                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
+                <br />name:
                 <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                <br />picture:
-                <asp:Label ID="pictureLabel" runat="server" Text='<%# Eval("picture") %>' />
                 <br />price:
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
+                <br />Details:
+                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
                 <br /></td>
         </ItemTemplate>
         <LayoutTemplate>
@@ -85,15 +93,17 @@
             </table>
         </LayoutTemplate>
         <SelectedItemTemplate>
-            <td runat="server" style="background-color: #FFCC66;font-weight: bold;color: #000080;">name:
+            <td runat="server" style="background-color: #FFCC66;font-weight: bold;color: #000080;">
+                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
+                <br />name:
                 <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                <br />picture:
-                <asp:Label ID="pictureLabel" runat="server" Text='<%# Eval("picture") %>' />
                 <br />price:
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
+                <br />Details:
+                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
                 <br /></td>
         </SelectedItemTemplate>
     </asp:ListView>
-    <asp:SqlDataSource ID="Products_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [name], [picture], [price] FROM [Product]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="Products_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
 </asp:Content>
 

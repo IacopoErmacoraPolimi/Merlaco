@@ -3,20 +3,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:ListView ID="ListView1" runat="server" DataSourceID="Users_datasource">
+    <asp:ListView ID="ListView1" runat="server" DataSourceID="users_datasource">
         <AlternatingItemTemplate>
             <tr style="background-color: #FFFFFF;color: #284775;">
                 <td>
-                    <asp:Label ID="UserNameLabel" runat="server" Text='<%# Eval("UserName") %>' />
+                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="LoweredUserNameLabel" runat="server" Text='<%# Eval("LoweredUserName") %>' />
+                    <asp:Label ID="surnameLabel" runat="server" Text='<%# Eval("surname") %>' />
                 </td>
                 <td>
-                    <asp:CheckBox ID="IsAnonymousCheckBox" runat="server" Checked='<%# Eval("IsAnonymous") %>' Enabled="false" />
+                    <asp:Label ID="EmailLabel" runat="server" Text='<%# Eval("Email") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="LastActivityDateLabel" runat="server" Text='<%# Eval("LastActivityDate") %>' />
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("../user_profile.aspx?u={0}", Eval("username")) %>' />
                 </td>
             </tr>
         </AlternatingItemTemplate>
@@ -27,16 +27,16 @@
                     <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
                 </td>
                 <td>
-                    <asp:TextBox ID="UserNameTextBox" runat="server" Text='<%# Bind("UserName") %>' />
+                    <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
                 </td>
                 <td>
-                    <asp:TextBox ID="LoweredUserNameTextBox" runat="server" Text='<%# Bind("LoweredUserName") %>' />
+                    <asp:TextBox ID="surnameTextBox" runat="server" Text='<%# Bind("surname") %>' />
                 </td>
                 <td>
-                    <asp:CheckBox ID="IsAnonymousCheckBox" runat="server" Checked='<%# Bind("IsAnonymous") %>' />
+                    <asp:TextBox ID="EmailTextBox" runat="server" Text='<%# Bind("Email") %>' />
                 </td>
                 <td>
-                    <asp:TextBox ID="LastActivityDateTextBox" runat="server" Text='<%# Bind("LastActivityDate") %>' />
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("../user_profile.aspx?u={0}", Eval("username")) %>' />
                 </td>
             </tr>
         </EditItemTemplate>
@@ -54,32 +54,32 @@
                     <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
                 </td>
                 <td>
-                    <asp:TextBox ID="UserNameTextBox" runat="server" Text='<%# Bind("UserName") %>' />
+                    <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
                 </td>
                 <td>
-                    <asp:TextBox ID="LoweredUserNameTextBox" runat="server" Text='<%# Bind("LoweredUserName") %>' />
+                    <asp:TextBox ID="surnameTextBox" runat="server" Text='<%# Bind("surname") %>' />
                 </td>
                 <td>
-                    <asp:CheckBox ID="IsAnonymousCheckBox" runat="server" Checked='<%# Bind("IsAnonymous") %>' />
+                    <asp:TextBox ID="EmailTextBox" runat="server" Text='<%# Bind("Email") %>' />
                 </td>
                 <td>
-                    <asp:TextBox ID="LastActivityDateTextBox" runat="server" Text='<%# Bind("LastActivityDate") %>' />
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("../user_profile.aspx?u={0}", Eval("username")) %>' />
                 </td>
             </tr>
         </InsertItemTemplate>
         <ItemTemplate>
             <tr style="background-color: #E0FFFF;color: #333333;">
                 <td>
-                    <asp:Label ID="UserNameLabel" runat="server" Text='<%# Eval("UserName") %>' />
+                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="LoweredUserNameLabel" runat="server" Text='<%# Eval("LoweredUserName") %>' />
+                    <asp:Label ID="surnameLabel" runat="server" Text='<%# Eval("surname") %>' />
                 </td>
                 <td>
-                    <asp:CheckBox ID="IsAnonymousCheckBox" runat="server" Checked='<%# Eval("IsAnonymous") %>' Enabled="false" />
+                    <asp:Label ID="EmailLabel" runat="server" Text='<%# Eval("Email") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="LastActivityDateLabel" runat="server" Text='<%# Eval("LastActivityDate") %>' />
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("../user_profile.aspx?u={0}", Eval("username")) %>' />
                 </td>
             </tr>
         </ItemTemplate>
@@ -89,10 +89,10 @@
                     <td runat="server">
                         <table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
                             <tr runat="server" style="background-color: #E0FFFF;color: #333333;">
-                                <th runat="server">UserName</th>
-                                <th runat="server">LoweredUserName</th>
-                                <th runat="server">IsAnonymous</th>
-                                <th runat="server">LastActivityDate</th>
+                                <th runat="server">name</th>
+                                <th runat="server">surname</th>
+                                <th runat="server">Email</th>
+                                <th runat="server">See Profile</th>
                             </tr>
                             <tr id="itemPlaceholder" runat="server">
                             </tr>
@@ -113,20 +113,19 @@
         <SelectedItemTemplate>
             <tr style="background-color: #E2DED6;font-weight: bold;color: #333333;">
                 <td>
-                    <asp:Label ID="UserNameLabel" runat="server" Text='<%# Eval("UserName") %>' />
+                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="LoweredUserNameLabel" runat="server" Text='<%# Eval("LoweredUserName") %>' />
+                    <asp:Label ID="surnameLabel" runat="server" Text='<%# Eval("surname") %>' />
                 </td>
                 <td>
-                    <asp:CheckBox ID="IsAnonymousCheckBox" runat="server" Checked='<%# Eval("IsAnonymous") %>' Enabled="false" />
+                    <asp:Label ID="EmailLabel" runat="server" Text='<%# Eval("Email") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="LastActivityDateLabel" runat="server" Text='<%# Eval("LastActivityDate") %>' />
+                    <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("../user_profile.aspx?u={0}", Eval("username")) %>' />
                 </td>
             </tr>
         </SelectedItemTemplate>
     </asp:ListView>
-    <asp:SqlDataSource ID="Users_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [UserName], [LoweredUserName], [IsAnonymous], [LastActivityDate] FROM [vw_aspnet_Users]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="users_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
 </asp:Content>
-

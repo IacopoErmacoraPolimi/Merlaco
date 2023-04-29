@@ -5,16 +5,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="image-block">
-        a
+        <asp:Image ID="image" runat="server" AlternateText="Product Image"/>
     </div>
     <div id="data-block">
-        <h1>Product name</h1>
-        <h2>123$</h2>
-        <h3>123$/Kg</h3>
+        <h1><%= name %></h1>
+        <h2><%= price %>$</h2>
+        <h3>Origin: <%= origin %></h3>
+        <h3>Eco or not: <%= eco_or_not %></h3>
+        <h3>Quantity in stock: <%= quantity_in_stock %></h3>
+        <h3>Place: <%= place %></h3>
+        <h3>Alternative: <%= alternative %></h3>
         <asp:Button ID="Button1" runat="server" Text="Add to Cart" />
         <asp:Button ID="Button2" runat="server" Text="Edit" />
         <asp:Button ID="Button3" runat="server" Text="Delete" />
     </div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>Description: <%= description %></p>
 </asp:Content>
 

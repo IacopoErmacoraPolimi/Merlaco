@@ -9,6 +9,6 @@ public partial class Products_products : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Products_datasource.SelectCommand = "SELECT [barcode], [name], [picture], [price] FROM [Product]";
     }
 }

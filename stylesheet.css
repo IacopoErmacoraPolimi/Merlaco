@@ -35,7 +35,7 @@ li a:hover:not(.active) {
 
 #sideBar {
     background-color:#ff6A00;
-    height: 90vh;
+    min-height: 90vh;
     padding: 0px;
     max-width: 20vw;
     min-width: 20vw;
@@ -44,7 +44,7 @@ li a:hover:not(.active) {
 }
 
 #mainContent {
-    height: 90vh;
+    min-height: 90vh;
     padding: 0px;
     max-width: 78vw;
     min-width: 78vw;
