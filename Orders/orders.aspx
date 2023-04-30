@@ -21,6 +21,9 @@
                 <td>
                     <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
                 </td>
+                <td>
+                    <asp:Button ID="DeleteOrder" runat="server" Text="Delete Order" onclick="DeleteOrderButton_Click" />
+                </td>
             </tr>
         </AlternatingItemTemplate>
         <EditItemTemplate>
@@ -44,12 +47,15 @@
                 <td>
                     <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
                 </td>
+                <td>
+                    <asp:Button ID="DeleteOrder" runat="server" Text="Delete Order" onclick="DeleteOrderButton_Click" />
+                </td>
             </tr>
         </EditItemTemplate>
         <EmptyDataTemplate>
             <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                 <tr>
-                    <td>No data was returned.</td>
+                    <td>You haven't made any order yet.</td>
                 </tr>
             </table>
         </EmptyDataTemplate>
@@ -74,6 +80,9 @@
                 <td>
                     <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
                 </td>
+                <td>
+                    <asp:Button ID="DeleteOrder" runat="server" Text="Delete Order" onclick="DeleteOrderButton_Click" />
+                </td>
             </tr>
         </InsertItemTemplate>
         <ItemTemplate>
@@ -93,6 +102,9 @@
                 <td>
                     <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
                 </td>
+                <td>
+                    <asp:Button ID="DeleteOrder" runat="server" Text="Delete Order" onclick="DeleteOrderButton_Click" />
+                </td>
             </tr>
         </ItemTemplate>
         <LayoutTemplate>
@@ -106,6 +118,7 @@
                                 <th runat="server">picked</th>
                                 <th runat="server">N_items</th>
                                 <th runat="server">See Details</th>
+                                <th id="Th1" runat="server">Delete Order</th>
                             </tr>
                             <tr id="itemPlaceholder" runat="server">
                             </tr>
@@ -139,6 +152,9 @@
                 </td>
                 <td>
                     <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("order_info.aspx?o={0}", Eval("order_number")) %>' />
+                </td>
+                <td>
+                    <asp:Button ID="DeleteOrder" runat="server" Text="Delete Order" onclick="DeleteOrderButton_Click" />
                 </td>
             </tr>
         </SelectedItemTemplate>

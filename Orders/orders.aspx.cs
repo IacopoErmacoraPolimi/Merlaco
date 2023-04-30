@@ -23,7 +23,7 @@ public partial class Orders_Orders : System.Web.UI.Page
         }
         else if (User.IsInRole("customer"))
         {
-            Orders_datasource.SelectCommand = "SELECT [Order].[order_number], [Order_picker].[picker], [Order_picker].[picked], SUM([Order].[quantity]) as N_items FROM [Order], [Order_picker], [Users] WHERE [Order].[order_number] = [Order_picker].[order_number] AND [Order].[user_email] = [aspnet_Membership].[email] AND [aspnet_Membership].[UserId] = [aspnet_Users].[UserId] AND [aspnet_Users].[UserName] = '" + Membership.GetUser().UserName + "' GROUP BY [Order].[order_number],  [Order_picker].[picker], [Order_picker].[picked]";
+            Orders_datasource.SelectCommand = "SELECT [Order].[order_number], [Order_picker].[picker], [Order_picker].[picked], SUM([Order].[quantity]) as N_items FROM [Order], [Order_picker], [Users], [aspnet_Membership], [aspnet_Users] WHERE [Order].[order_number] = [Order_picker].[order_number] AND [Order].[user_email] = [aspnet_Membership].[email] AND [aspnet_Membership].[UserId] = [aspnet_Users].[UserId] AND [aspnet_Users].[UserName] = '" + Membership.GetUser().UserName + "' GROUP BY [Order].[order_number], [Order_picker].[picker], [Order_picker].[picked]";
         }
     }
 
@@ -35,5 +35,10 @@ public partial class Orders_Orders : System.Web.UI.Page
             ListViewItem itemClicked = e.Item;
             // Find Controls/Retrieve values from the item  here
         }
+    }
+
+    protected void DeleteOrderButton_Click(object sender, EventArgs e)
+    {
+
     }
 }

@@ -8,11 +8,28 @@
         <p>Username: <%= username %></p>
         <p>Email: <%= email %></p>
         <p>Address: <%= address %></p>
-        <p>IBAN: <%= IBAN %></p>
-        <asp:Button ID="Button1" runat="server" Text="Edit user" />
+        <asp:LoginView ID="LoginView2" runat="server">
+            <RoleGroups>
+
+                <asp:RoleGroup Roles="admin">
+                  <ContentTemplate>
+                    <p>IBAN: <%= IBAN %></p>
+                    <asp:Button ID="EditUserButton" runat="server" Text="Edit User" PostBackUrl='<%# "Admin/modify_user.aspx?usr={0}" + username %>' />
+                  </ContentTemplate>
+                </asp:RoleGroup>
+
+                <asp:RoleGroup Roles="picker">
+                  <ContentTemplate>
+                    <p>IBAN: <%= IBAN %></p>
+                  </ContentTemplate>
+                </asp:RoleGroup>
+
+              </RoleGroups>
+        </asp:LoginView>
+        
     </div>
     <div id="image-block">
-        a
+        <asp:Image ID="image" runat="server" AlternateText="Profile Image"/>
     </div>
 </asp:Content>
 

@@ -21,11 +21,12 @@ public partial class Users_user_profile : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
         SqlConnection Conn = new SqlConnection(dbstring);
 
-        string sqlStr = "SELECT [Users].[name], [Users].[surname], [Users].[address], [Users].[IBAN], [aspnet_Membership].[email], [Users].[username] FROM [Users], [aspnet_Users], [aspnet_membership] WHERE [Users].[username] = @theUsername AND [Users].[username] = [aspnet_Users].[UserName] AND [aspnet_Users].[UserId] = [aspnet_Membership].[UserId]";
+        string sqlStr = "SELECT [Users].[name], [Users].[surname], [Users].[address], [Users].[IBAN], [aspnet_Membership].[email], [Users].[username], [Users].[picture] FROM [Users], [aspnet_Users], [aspnet_membership] WHERE [Users].[username] = @theUsername AND [Users].[username] = [aspnet_Users].[UserName] AND [aspnet_Users].[UserId] = [aspnet_Membership].[UserId]";
 
         SqlCommand Comm1 = new SqlCommand(sqlStr, Conn);
 
@@ -60,7 +61,9 @@ public partial class Users_user_profile : System.Web.UI.Page
             IBAN = DR1.GetValue(3).ToString();
             email = DR1.GetValue(4).ToString();
             username = DR1.GetValue(5).ToString();
+            image.ImageUrl = DR1.GetValue(6).ToString();
         }
+
 
         Conn.Close();
     }

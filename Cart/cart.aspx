@@ -127,8 +127,8 @@
             </tr>
         </SelectedItemTemplate>
     </asp:ListView>
-    <asp:SqlDataSource ID="cart_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Product].[name], [Order].[quantity], [Product].[price], [Product].[price]*[Order].[quantity] as TotalPrice
+    <!--<asp:SqlDataSource ID="cart_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Product].[name], [Order].[quantity], [Product].[price], [Product].[price]*[Order].[quantity] as TotalPrice
 FROM [Order], [Product]
-WHERE [Order].[product_bar_code] = [Product].[barcode]"></asp:SqlDataSource>
+WHERE [Order].[product_bar_code] = [Product].[barcode]"></asp:SqlDataSource>-->
 </asp:Content>
 
