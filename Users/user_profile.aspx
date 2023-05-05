@@ -14,7 +14,7 @@
                 <asp:RoleGroup Roles="admin">
                   <ContentTemplate>
                     <p>IBAN: <%= IBAN %></p>
-                    <asp:Button ID="EditUserButton" runat="server" Text="Edit User" PostBackUrl='<%# "Admin/modify_user.aspx?usr={0}" + username %>' />
+                    <asp:Button ID="EditUserButton" runat="server" Text="Edit User" />
                   </ContentTemplate>
                 </asp:RoleGroup>
 

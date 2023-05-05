@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:Button ID="AddUserButton" runat="server" Text="Add User" />
     <asp:ListView ID="ListView1" runat="server" DataSourceID="users_datasource">
         <AlternatingItemTemplate>
             <tr style="background-color: #FFFFFF;color: #284775;">

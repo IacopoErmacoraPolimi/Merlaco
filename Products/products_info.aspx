@@ -21,7 +21,7 @@
                     <h3>Quantity in stock: <%= quantity_in_stock %></h3>
                     <h3>Place: <%= place %></h3>
                     <h3>Alternative: <%= alternative %></h3>
-                    <asp:Button ID="EditUserButton" runat="server" Text="Edit Product" PostBackUrl='<%# "Admin/modify_product.aspx?p={0}" + barcode %>' />
+                    <asp:Button ID="EditProductButton" runat="server" Text="Edit Product" />
                     <asp:Button ID="Button3" runat="server" Text="Delete" />
                   </ContentTemplate>
                 </asp:RoleGroup>

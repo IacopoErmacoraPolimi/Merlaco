@@ -18,7 +18,7 @@
         <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
 
         <ul>
-            <li><a href="Default.aspx">Merlaco</a></li>
+            <li><a href="Product/products.aspx">Merlaco</a></li>
             <li style="float: right"><a class="active" href="/WEE_Project/Cart/cart.aspx"><i class="bi bi-basket"></i></a></li>
             <li style="float: right">
                 <asp:LoginStatus ID="LoginStatus2" runat="server" />

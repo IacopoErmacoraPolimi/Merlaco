@@ -58,5 +58,8 @@ public partial class Products_products_info : System.Web.UI.Page
         }
 
         Conn.Close();
+
+        Button btn = (Button)LoginView2.FindControl("EditProductButton");
+        btn.PostBackUrl = "Admin/modify_product.aspx?bc=" + barcode;
     }
 }

@@ -66,5 +66,8 @@ public partial class Users_user_profile : System.Web.UI.Page
 
 
         Conn.Close();
+
+        Button btn = (Button)LoginView2.FindControl("EditUserButton");
+        btn.PostBackUrl = "Admin/modify_user.aspx?usr=" + username;
     }
 }

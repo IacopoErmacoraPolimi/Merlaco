@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:ListView ID="ListView1" runat="server" DataSourceID="Products_datasource" GroupItemCount="3">
+    <asp:Button ID="AddProductButton" runat="server" Text="Add Product" />
+    <asp:ListView ID="ListView1" runat="server" DataKeyNames="barcode" DataSourceID="Products_datasource" GroupItemCount="3"  OnSelectedIndexChanged="AddItemToCart_Click">
         <AlternatingItemTemplate>
             <td runat="server" style="background-color: #FAFAD2;color: #284775;">
                 <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
@@ -13,23 +14,10 @@
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
                 <br />Details:
                 <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
+                <br />Add to Cart:
+                <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
                 <br /></td>
         </AlternatingItemTemplate>
-        <EditItemTemplate>
-            <td runat="server" style="background-color: #FFCC66;color: #000080;">
-                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
-                <br />name:
-                <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
-                <br />price:
-                <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price") %>' />
-                <br />Details:
-                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
-                <br />
-                <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
-                <br />
-                <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
-                <br /></td>
-        </EditItemTemplate>
         <EmptyDataTemplate>
             <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                 <tr>
@@ -45,21 +33,6 @@
                 <td id="itemPlaceholder" runat="server"></td>
             </tr>
         </GroupTemplate>
-        <InsertItemTemplate>
-            <td runat="server" style="">
-                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
-                <br />name:
-                <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
-                <br />price:
-                <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price") %>' />
-                <br />Details:
-                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
-                <br />
-                <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
-                <br />
-                <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
-                <br /></td>
-        </InsertItemTemplate>
         <ItemTemplate>
             <td runat="server" style="background-color: #FFFBD6;color: #333333;">
                 <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
@@ -69,6 +42,8 @@
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
                 <br />Details:
                 <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
+                <br />Add to Cart:
+                <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
                 <br /></td>
         </ItemTemplate>
         <LayoutTemplate>
@@ -101,6 +76,8 @@
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
                 <br />Details:
                 <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
+                <br />Add to Cart:
+                <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
                 <br /></td>
         </SelectedItemTemplate>
     </asp:ListView>
