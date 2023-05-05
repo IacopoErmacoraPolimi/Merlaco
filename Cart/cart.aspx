@@ -5,15 +5,24 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <table>
     <tr>
-        <th>Barcode</th>
+        <th>Name</th>
         <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
     </tr>
-    <% foreach (Cart_item item in cart_list)
-       { %>
-        <tr>
-            <td><%= item.product_barcode %></td>
-            <td><%= item.product_quantity %></td>
-        </tr>
+    <% if (Session.Count > 0 && Session["cart"] != null)
+       {
+           foreach (Cart_item item in cart_list)
+           { %>
+            <tr>
+                <td><%= item.product_name %></td>
+                <td><%= item.product_quantity %></td>
+                <td><%= item.product_price %></td>
+                <td><%= item.product_quantity*item.product_price %></td>
+            </tr>
+        <% }
+       } else { %>
+            <p>TEST OLE OLE</p>
     <% } %>
 </table>
 </asp:Content>
