@@ -10,20 +10,19 @@
         <th>Price</th>
         <th>Total Price</th>
     </tr>
-    <% if (Session.Count > 0 && Session["cart"] != null)
-       {
-           foreach (Cart_item item in cart_list)
-           { %>
+    <asp:Repeater ID="Repeater1" runat="server" ItemType="Cart_item">
+        <ItemTemplate>
             <tr>
-                <td><%= item.product_name %></td>
-                <td><%= item.product_quantity %></td>
-                <td><%= item.product_price %></td>
-                <td><%= item.product_quantity*item.product_price %></td>
+                <td><%# Item.product_name %></td>
+                <td><asp:Button ID="ButtonDecrease" runat="server" CommandArgument='<%# Item.product_barcode %>' OnClick="Btn_Decrease" Text="-" /><%# Item.product_quantity %><asp:Button ID="ButtonIncrease" runat="server" CommandArgument='<%# Item.product_barcode %>' OnClick="Btn_Increase" Text="+" /></td>
+                <td><%# Item.product_price %></td>
+                <td><%# Item.product_quantity*Item.product_price %></td>
+                <td><asp:Button ID="ButtonDelete" runat="server" CommandArgument='<%# Item.product_barcode %>' OnClick="Btn_Delete" Text="Delete" /></td>
             </tr>
-        <% }
-       } else { %>
-            <p>TEST OLE OLE</p>
-    <% } %>
+        </ItemTemplate>
+    </asp:Repeater>
 </table>
+
+<asp:Button ID="test" runat="server" OnClick="Btn_Order" Text="Order" />
 </asp:Content>
 
