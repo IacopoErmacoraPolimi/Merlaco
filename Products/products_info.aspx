@@ -21,8 +21,9 @@
                     <h3>Quantity in stock: <%= quantity_in_stock %></h3>
                     <h3>Place: <%= place %></h3>
                     <h3>Alternative: <%= alternative %></h3>
+                    <h3>Active: <%= active %></h3>
                     <asp:Button ID="EditProductButton" runat="server" Text="Edit Product" />
-                    <asp:Button ID="Button3" runat="server" Text="Delete" />
+                    <asp:Button ID="Button3" runat="server" Text="Activate/Deactivate" OnClick="OnClick_active_deactive_btn" />
                   </ContentTemplate>
                 </asp:RoleGroup>
 
@@ -31,12 +32,6 @@
                     <h3>Quantity in stock: <%= quantity_in_stock %></h3>
                     <h3>Place: <%= place %></h3>
                     <h3>Alternative: <%= alternative %></h3>
-                  </ContentTemplate>
-                </asp:RoleGroup>
-
-                <asp:RoleGroup Roles="customer">
-                  <ContentTemplate>
-                    <asp:Button ID="Button1" runat="server" Text="Add to Cart" />
                   </ContentTemplate>
                 </asp:RoleGroup>
 

@@ -28,7 +28,17 @@ public partial class Users_modify_user : System.Web.UI.Page
 
             SqlCommand Comm1 = new SqlCommand(sqlStr, Conn);
 
-            string theusr = Request.QueryString["usr"];
+            string theusr;
+
+            if (User.IsInRole("admin"))
+            {
+                theusr = Request.QueryString["usr"];
+            }
+            else
+            {
+                theusr = Membership.GetUser().UserName;
+            }
+
             Comm1.Parameters.AddWithValue("@Theusername", theusr);
 
             Conn.Open();
@@ -79,7 +89,16 @@ public partial class Users_modify_user : System.Web.UI.Page
         // Create an executable SQL command containing our SQL statement and the database connection
         SqlCommand sqlCmd = new SqlCommand(sqlStr, con);
 
-        string theusr = Request.QueryString["usr"];
+        string theusr;
+
+        if (User.IsInRole("admin"))
+        {
+            theusr = Request.QueryString["usr"];
+        }
+        else
+        {
+            theusr = Membership.GetUser().UserName;
+        }
 
         string filePath = image.ImageUrl;
 

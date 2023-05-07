@@ -26,7 +26,7 @@ public partial class Users_user_profile : System.Web.UI.Page
 
         SqlConnection Conn = new SqlConnection(dbstring);
 
-        string sqlStr = "SELECT [Users].[name], [Users].[surname], [Users].[address], [Users].[IBAN], [aspnet_Membership].[email], [Users].[username], [Users].[picture] FROM [Users], [aspnet_Users], [aspnet_membership] WHERE [Users].[username] = @theUsername AND [Users].[username] = [aspnet_Users].[UserName] AND [aspnet_Users].[UserId] = [aspnet_Membership].[UserId]";
+        string sqlStr = "SELECT [Users].[name], [Users].[surname], [Users].[address], [Users].[IBAN], [aspnet_Membership].[email], [Users].[username], [Users].[picture] FROM [Users], [aspnet_Users], [aspnet_membership] WHERE [Users].[username] = @theUsername AND [Users].[username] = [aspnet_Users].[UserName] AND [aspnet_Users].[UserId] = [aspnet_Membership].[UserId] AND [aspnet_Membership].[isApproved] = 1";
 
         SqlCommand Comm1 = new SqlCommand(sqlStr, Conn);
 
@@ -68,6 +68,35 @@ public partial class Users_user_profile : System.Web.UI.Page
         Conn.Close();
 
         Button btn = (Button)LoginView2.FindControl("EditUserButton");
-        btn.PostBackUrl = "Admin/modify_user.aspx?usr=" + username;
+        btn.PostBackUrl = "modify_user.aspx?usr=" + username;
+    }
+
+    protected void OnClick_delete_user(object sender, EventArgs e)
+    {
+        // Gets the default connection string/path to our database from the web.config file
+        string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+        // Creates a connection to our database
+        SqlConnection con = new SqlConnection(dbstring);
+
+        // The SQL statement to insert a booking. By using prepared statements,
+        // we automatically get some protection against SQL injection.
+        string sqlStr = "UPDATE aspnet_Membership SET IsApproved = 0 WHERE UserId IN (SELECT UserId FROM aspnet_Users WHERE UserName = @theUsername)";
+
+        // Open the database connection
+        con.Open();
+
+        // Create an executable SQL command containing our SQL statement and the database connection
+        SqlCommand sqlCmd = new SqlCommand(sqlStr, con);
+
+        sqlCmd.Parameters.AddWithValue("@theUsername", username);
+
+        // Execute the SQL command
+        sqlCmd.ExecuteNonQuery();
+
+        // Close the connection to the database
+        con.Close();
+
+        Response.Redirect(Request.RawUrl);
     }
 }

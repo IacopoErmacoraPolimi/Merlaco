@@ -12,9 +12,14 @@ public partial class Products_products : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Products_datasource.SelectCommand = "SELECT [barcode], [name], [picture], [price] FROM [Product]";
-
-        AddProductButton.PostBackUrl = "Admin/add_product.aspx";
+        if (User.IsInRole("admin"))
+        {
+            Products_datasource.SelectCommand = "SELECT [barcode], [name], [picture], [price], [active] FROM [Product]";
+        }
+        else
+        {
+            Products_datasource.SelectCommand = "SELECT [barcode], [name], [picture], [price], [active] FROM [Product] WHERE [active] = 1";
+        }
     }
 
     protected void AddItemToCart_Click(object sender, EventArgs e)

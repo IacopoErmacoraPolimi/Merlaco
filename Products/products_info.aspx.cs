@@ -23,6 +23,7 @@ public partial class Products_products_info : System.Web.UI.Page
     public string price { get; set; }
     public string place { get; set; }
     public string alternative { get; set; }
+    public bool active { get; set; }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -55,11 +56,43 @@ public partial class Products_products_info : System.Web.UI.Page
             price = DR1.GetValue(7).ToString();
             place = DR1.GetValue(8).ToString();
             alternative = DR1.GetValue(9).ToString();
+            active = Convert.ToBoolean(DR1.GetValue(10).ToString());
         }
 
         Conn.Close();
 
-        Button btn = (Button)LoginView2.FindControl("EditProductButton");
-        btn.PostBackUrl = "Admin/modify_product.aspx?bc=" + barcode;
+        if (User.IsInRole("admin"))
+        {
+            Button btn = (Button)LoginView2.FindControl("EditProductButton");
+            btn.PostBackUrl = "Admin/modify_product.aspx?bc=" + barcode;
+        }
+    }
+
+    protected void OnClick_active_deactive_btn(object sender, EventArgs e)
+    {
+        // Gets the default connection string/path to our database from the web.config file
+        string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+        // Creates a connection to our database
+        SqlConnection con = new SqlConnection(dbstring);
+
+        // The SQL statement to insert a booking. By using prepared statements,
+        // we automatically get some protection against SQL injection.
+        string sqlStr_o = "UPDATE Product SET active = ~active WHERE barcode = @theBarcode";
+
+        // Open the database connection
+        con.Open();
+
+        // Create an executable SQL command containing our SQL statement and the database connection
+        SqlCommand sqlCmd_o = new SqlCommand(sqlStr_o, con);
+
+        // Fill in the parameters in our prepared SQL statement
+        sqlCmd_o.Parameters.AddWithValue("@theBarcode", barcode);
+
+        // Execute the SQL command
+        sqlCmd_o.ExecuteNonQuery();
+
+        // Close the connection to the database
+        con.Close();
     }
 }

@@ -15,17 +15,26 @@
                   <ContentTemplate>
                     <p>IBAN: <%= IBAN %></p>
                     <asp:Button ID="EditUserButton" runat="server" Text="Edit User" />
+                    <asp:Button ID="DeleteUserButton" runat="server" Text="Delete User" OnClick="OnClick_delete_user" />
                   </ContentTemplate>
                 </asp:RoleGroup>
 
                 <asp:RoleGroup Roles="picker">
                   <ContentTemplate>
                     <p>IBAN: <%= IBAN %></p>
+                    <asp:Button ID="EditUserButton" runat="server" Text="Edit User" />
+                  </ContentTemplate>
+                </asp:RoleGroup>
+
+                <asp:RoleGroup Roles="customer">
+                  <ContentTemplate>
+                    <asp:Button ID="EditUserButton" runat="server" Text="Edit User" />
                   </ContentTemplate>
                 </asp:RoleGroup>
 
               </RoleGroups>
         </asp:LoginView>
+        
         
     </div>
     <div id="image-block">

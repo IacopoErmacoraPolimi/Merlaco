@@ -45,7 +45,14 @@ public partial class Cart_cart : System.Web.UI.Page
 
         cart_list.Sort((x, y) => string.Compare(x.product_name, y.product_name));
 
-        Session["cart"] = cart_list;
+        if (cart_list.Count == 0)
+        {
+            Session.Remove("cart");
+        }
+        else
+        {
+            Session["cart"] = cart_list;
+        }
 
         Response.Redirect(Request.RawUrl);
     }
@@ -71,7 +78,14 @@ public partial class Cart_cart : System.Web.UI.Page
         cart_list.Add(new_item);
         cart_list.Sort((x, y) => string.Compare(x.product_name, y.product_name));
 
-        Session["cart"] = cart_list;
+        if (cart_list.Count == 0)
+        {
+            Session.Remove("cart");
+        }
+        else
+        {
+            Session["cart"] = cart_list;
+        }
 
         Response.Redirect(Request.RawUrl);
     }
@@ -100,13 +114,24 @@ public partial class Cart_cart : System.Web.UI.Page
 
         cart_list.Sort((x, y) => string.Compare(x.product_name, y.product_name));
 
-        Session["cart"] = cart_list;
+        if (cart_list.Count == 0)
+        {
+            Session.Remove("cart");
+        }
+        else
+        {
+            Session["cart"] = cart_list;
+        }
 
         Response.Redirect(Request.RawUrl);
     }
 
     protected void Btn_Order(Object sender, EventArgs e)
     {
+        if (Session.Count == 0 || Session["cart"] == null)
+        {
+            Response.Redirect(Request.RawUrl);
+        }
         // Gets the default connection string/path to our database from the web.config file
         string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
@@ -115,12 +140,12 @@ public partial class Cart_cart : System.Web.UI.Page
 
         // The SQL statement to insert a user. By using prepared statements,
         // we automatically get some protection against SQL injection.
-        string sqlStr_order = "INSERT INTO [Order] (product_bar_code, order_number, username, quantity, picked) VALUES (@theProduct_bar_code, @theOrder_number, @theUsername, @theQuantity, 0)";
-        string sqlStr_order_picker = "INSERT INTO [order_picker] (picker, order_number, picked) VALUES (0, @theOrder_number, 0)";
-
+        string sqlStr_order = "INSERT INTO [Order] (product_bar_code, order_number, username, quantity, picked, date) VALUES (@theProduct_bar_code, @theOrder_number, @theUsername, @theQuantity, 0, @theDate)";
+        string sqlStr_order_picker = "INSERT INTO [order_picker] (picker, order_number, picked) VALUES (@thePicker, @theOrder_number, 0)";
+        string sqlStr_pick_picker = "SELECT TOP 1 [Users].[username] FROM [Users], [aspnet_Users], [aspnet_Membership], [aspnet_Roles], [aspnet_UsersInRoles] WHERE [Users].[username]=[aspnet_Users].[UserName] AND [aspnet_Users].[UserId]=[aspnet_Membership].[UserId] AND [aspnet_Membership].[isApproved] = 1 AND [aspnet_UsersInRoles].[UserId] IN (SELECT [aspnet_Users].[UserId] FROM [aspnet_Users] WHERE [aspnet_Users].[UserName]=[Users].[username]) AND [aspnet_Roles].[RoleId]=[aspnet_UsersInRoles].[RoleId] AND [aspnet_Roles].[RoleName]='picker' ORDER BY NEWID()";
 
         Guid guid = Guid.NewGuid();
-        string order_number = guid.ToString();
+        string order_number = guid.ToString("N");
 
         // Open the database connection
         con.Open();
@@ -135,15 +160,31 @@ public partial class Cart_cart : System.Web.UI.Page
             sqlCmd_order.Parameters.AddWithValue("@theOrder_number", order_number);
             sqlCmd_order.Parameters.AddWithValue("@theUsername", Membership.GetUser().UserName);
             sqlCmd_order.Parameters.AddWithValue("@theQuantity", c.product_quantity);
+            SqlParameter dateParameter = new SqlParameter("@theDate", System.Data.SqlDbType.DateTime);
+            dateParameter.Value = DateTime.Today;
+            sqlCmd_order.Parameters.Add(dateParameter);
 
             // Execute the SQL command
             sqlCmd_order.ExecuteNonQuery();
         }
 
         // Create an executable SQL command containing our SQL statement and the database connection
+        SqlCommand sqlCmd_pick_picker = new SqlCommand(sqlStr_pick_picker, con);
+
+        SqlDataReader DR1 = sqlCmd_pick_picker.ExecuteReader();
+
+        string picked_picker = "test";
+        if (DR1.Read())
+        {
+            picked_picker = DR1.GetValue(0).ToString();
+        }
+
+        DR1.Close();
+
         SqlCommand sqlCmd_order_picker = new SqlCommand(sqlStr_order_picker, con);
 
         sqlCmd_order_picker.Parameters.AddWithValue("@theOrder_number", order_number);
+        sqlCmd_order_picker.Parameters.AddWithValue("@thePicker", picked_picker);
 
         // Execute the SQL command
         sqlCmd_order_picker.ExecuteNonQuery();

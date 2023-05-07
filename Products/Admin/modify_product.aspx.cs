@@ -117,7 +117,7 @@ public partial class Products_modify_product : System.Web.UI.Page
         con.Close();
 
         // Show the user that the booking has been added
-        resultLabel.Text = "Product modified" + image.ImageUrl;
+        resultLabel.Text = "Product modified";
 
     }
 }

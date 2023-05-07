@@ -3,7 +3,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:Button ID="AddProductButton" runat="server" Text="Add Product" />
+    <asp:LoginView ID="LoginView2" runat="server">
+        <RoleGroups>
+            <asp:RoleGroup Roles="admin">
+                <ContentTemplate>
+                    <asp:Button ID="AddProductButton" runat="server" Text="Add Product" PostBackUrl = "Admin/add_product.aspx"/>
+                </ContentTemplate>
+            </asp:RoleGroup>
+        </RoleGroups>
+    </asp:LoginView>
     <asp:ListView ID="ListView1" runat="server" DataKeyNames="barcode" DataSourceID="Products_datasource" GroupItemCount="3"  OnSelectedIndexChanged="AddItemToCart_Click">
         <AlternatingItemTemplate>
             <td runat="server" style="background-color: #FAFAD2;color: #284775;">
@@ -14,9 +22,27 @@
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
                 <br />Details:
                 <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
-                <br />Add to Cart:
-                <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
-                <br /></td>
+                <br />
+                <asp:LoginView ID="LoginView2" runat="server">
+                    <RoleGroups>
+                        <asp:RoleGroup Roles="customer">
+                            <ContentTemplate>
+                            Add to Cart:
+                            <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
+                            <br />
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+
+                        <asp:RoleGroup Roles="admin">
+                            <ContentTemplate>
+                            Active product:
+                            <asp:Label ID="priceLabel" runat="server" Text='<%# (bool)Eval("active") ? "yes" : "no" %>' />
+                            <br />
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                    </RoleGroups>
+                </asp:LoginView>
+                </td>
         </AlternatingItemTemplate>
         <EmptyDataTemplate>
             <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
@@ -42,9 +68,27 @@
                 <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
                 <br />Details:
                 <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
-                <br />Add to Cart:
-                <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
-                <br /></td>
+                <br />
+                <asp:LoginView ID="LoginView2" runat="server">
+                    <RoleGroups>
+                        <asp:RoleGroup Roles="customer">
+                          <ContentTemplate>
+                            Add to Cart:
+                            <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
+                            <br />
+                          </ContentTemplate>
+                        </asp:RoleGroup>
+
+                        <asp:RoleGroup Roles="admin">
+                            <ContentTemplate>
+                            Active product:
+                            <asp:Label ID="priceLabel" runat="server" Text='<%# (bool)Eval("active") ? "yes" : "no" %>' />
+                            <br />
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                    </RoleGroups>
+                </asp:LoginView>
+                </td>
         </ItemTemplate>
         <LayoutTemplate>
             <table runat="server">
@@ -67,19 +111,6 @@
                 </tr>
             </table>
         </LayoutTemplate>
-        <SelectedItemTemplate>
-            <td runat="server" style="background-color: #FFCC66;font-weight: bold;color: #000080;">
-                <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
-                <br />name:
-                <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                <br />price:
-                <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
-                <br />Details:
-                <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
-                <br />Add to Cart:
-                <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
-                <br /></td>
-        </SelectedItemTemplate>
     </asp:ListView>
     <asp:SqlDataSource ID="Products_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"></asp:SqlDataSource>
 </asp:Content>

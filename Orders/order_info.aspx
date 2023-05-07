@@ -3,49 +3,53 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:ListView ID="ListView1" runat="server" DataSourceID="Order_info_datasource">
+    <asp:ListView ID="ListView1" runat="server" DataSourceID="Order_info_datasource" DataKeyNames="order_number,product_bar_code">
         <AlternatingItemTemplate>
             <tr style="background-color: #FFFFFF;color: #284775;">
                 <td>
                     <asp:Label ID="product_bar_codeLabel" runat="server" Text='<%# Eval("product_bar_code") %>' />
                 </td>
                 <td>
+                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                </td>
+                <td>
                     <asp:Label ID="quantityLabel" runat="server" Text='<%# Eval("quantity") %>' />
                 </td>
-                <td>
-                    <asp:Label ID="placeLabel" runat="server" Text='<%# Eval("place") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="alternativeLabel" runat="server" Text='<%# Eval("alternative") %>' />
-                </td>
-                <td>
-                    <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Eval("picked") %>' Enabled="false" />
-                </td>
+                <asp:LoginView ID="LoginView2" runat="server">
+                    <RoleGroups>
+
+                        <asp:RoleGroup Roles="admin">
+                          <ContentTemplate>
+                            <td>
+                                <asp:Label ID="placeLabel" runat="server" Text='<%# Eval("place") %>' />
+                            </td>
+                            <td>
+                                <asp:Label ID="alternativeLabel" runat="server" Text='<%# Eval("alternative") %>' />
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Eval("picked") %>' Enabled="true" OnCheckedChanged="Picker_checkChanged" AutoPostBack="true" />
+                            </td>
+                          </ContentTemplate>
+                        </asp:RoleGroup>
+
+                        <asp:RoleGroup Roles="picker">
+                          <ContentTemplate>
+                            <td>
+                                <asp:Label ID="placeLabel" runat="server" Text='<%# Eval("place") %>' />
+                            </td>
+                            <td>
+                                <asp:Label ID="alternativeLabel" runat="server" Text='<%# Eval("alternative") %>' />
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Eval("picked") %>' Enabled="true" OnCheckedChanged="Picker_checkChanged" AutoPostBack="true" />
+                            </td>
+                          </ContentTemplate>
+                        </asp:RoleGroup>
+
+                      </RoleGroups>
+                </asp:LoginView>
             </tr>
         </AlternatingItemTemplate>
-        <EditItemTemplate>
-            <tr style="background-color: #999999;">
-                <td>
-                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
-                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
-                </td>
-                <td>
-                    <asp:TextBox ID="product_bar_codeTextBox" runat="server" Text='<%# Bind("product_bar_code") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="quantityTextBox" runat="server" Text='<%# Bind("quantity") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="placeTextBox" runat="server" Text='<%# Bind("place") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="alternativeTextBox" runat="server" Text='<%# Bind("alternative") %>' />
-                </td>
-                <td>
-                    <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Bind("picked") %>' />
-                </td>
-            </tr>
-        </EditItemTemplate>
         <EmptyDataTemplate>
             <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                 <tr>
@@ -53,46 +57,50 @@
                 </tr>
             </table>
         </EmptyDataTemplate>
-        <InsertItemTemplate>
-            <tr style="">
-                <td>
-                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
-                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
-                </td>
-                <td>
-                    <asp:TextBox ID="product_bar_codeTextBox" runat="server" Text='<%# Bind("product_bar_code") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="quantityTextBox" runat="server" Text='<%# Bind("quantity") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="placeTextBox" runat="server" Text='<%# Bind("place") %>' />
-                </td>
-                <td>
-                    <asp:TextBox ID="alternativeTextBox" runat="server" Text='<%# Bind("alternative") %>' />
-                </td>
-                <td>
-                    <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Bind("picked") %>' />
-                </td>
-            </tr>
-        </InsertItemTemplate>
         <ItemTemplate>
             <tr style="background-color: #E0FFFF;color: #333333;">
                 <td>
                     <asp:Label ID="product_bar_codeLabel" runat="server" Text='<%# Eval("product_bar_code") %>' />
                 </td>
                 <td>
+                    <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                </td>
+                <td>
                     <asp:Label ID="quantityLabel" runat="server" Text='<%# Eval("quantity") %>' />
                 </td>
-                <td>
-                    <asp:Label ID="placeLabel" runat="server" Text='<%# Eval("place") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="alternativeLabel" runat="server" Text='<%# Eval("alternative") %>' />
-                </td>
-                <td>
-                    <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Eval("picked") %>' Enabled="false" />
-                </td>
+                <asp:LoginView ID="LoginView2" runat="server">
+                    <RoleGroups>
+
+                        <asp:RoleGroup Roles="admin">
+                          <ContentTemplate>
+                            <td>
+                                <asp:Label ID="placeLabel" runat="server" Text='<%# Eval("place") %>' />
+                            </td>
+                            <td>
+                                <asp:Label ID="alternativeLabel" runat="server" Text='<%# Eval("alternative") %>' />
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Eval("picked") %>' Enabled="true" OnCheckedChanged="Picker_checkChanged" AutoPostBack="true" />
+                            </td>
+                          </ContentTemplate>
+                        </asp:RoleGroup>
+
+                        <asp:RoleGroup Roles="picker">
+                          <ContentTemplate>
+                            <td>
+                                <asp:Label ID="placeLabel" runat="server" Text='<%# Eval("place") %>' />
+                            </td>
+                            <td>
+                                <asp:Label ID="alternativeLabel" runat="server" Text='<%# Eval("alternative") %>' />
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Eval("picked") %>' Enabled="true" OnCheckedChanged="Picker_checkChanged" AutoPostBack="true" />
+                            </td>
+                          </ContentTemplate>
+                        </asp:RoleGroup>
+
+                      </RoleGroups>
+                </asp:LoginView>
             </tr>
         </ItemTemplate>
         <LayoutTemplate>
@@ -101,7 +109,8 @@
                     <td runat="server">
                         <table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
                             <tr runat="server" style="background-color: #E0FFFF;color: #333333;">
-                                <th runat="server">product_bar_code</th>
+                                <th runat="server">product barcode</th>
+                                <th runat="server">name</th>
                                 <th runat="server">quantity</th>
                                 <th runat="server">place</th>
                                 <th runat="server">alternative</th>
@@ -123,25 +132,6 @@
                 </tr>
             </table>
         </LayoutTemplate>
-        <SelectedItemTemplate>
-            <tr style="background-color: #E2DED6;font-weight: bold;color: #333333;">
-                <td>
-                    <asp:Label ID="product_bar_codeLabel" runat="server" Text='<%# Eval("product_bar_code") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="quantityLabel" runat="server" Text='<%# Eval("quantity") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="placeLabel" runat="server" Text='<%# Eval("place") %>' />
-                </td>
-                <td>
-                    <asp:Label ID="alternativeLabel" runat="server" Text='<%# Eval("alternative") %>' />
-                </td>
-                <td>
-                    <asp:CheckBox ID="pickedCheckBox" runat="server" Checked='<%# Eval("picked") %>' Enabled="false" />
-                </td>
-            </tr>
-        </SelectedItemTemplate>
     </asp:ListView>
     <asp:SqlDataSource ID="Order_info_datasource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ></asp:SqlDataSource>
 </asp:Content>
