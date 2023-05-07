@@ -5,15 +5,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div id="data-block">
         <h1><%= name %> <%= surname %></h1>
-        <p>Username: <%= username %></p>
-        <p>Email: <%= email %></p>
-        <p>Address: <%= address %></p>
+        <h4 style="margin:5px;font-weight:normal;"><b style="color:#545454;">Username:</b> <%= username %></h4>
+        <h4 style="margin:5px;font-weight:normal;"><b style="color:#545454;">Email:</b> <%= email %></h4>
+        <h4 style="margin:5px;font-weight:normal;"><b style="color:#545454;">Address:</b> <%= address %></h4>
         <asp:LoginView ID="LoginView2" runat="server">
             <RoleGroups>
 
                 <asp:RoleGroup Roles="admin">
                   <ContentTemplate>
-                    <p>IBAN: <%= IBAN %></p>
+                    <h4 style="margin:5px;font-weight:normal;"><b style="color:#545454;">IBAN:</b> <%= IBAN %></h4>
                     <asp:Button ID="EditUserButton" runat="server" Text="Edit User" />
                     <asp:Button ID="DeleteUserButton" runat="server" Text="Delete User" OnClick="OnClick_delete_user" />
                   </ContentTemplate>

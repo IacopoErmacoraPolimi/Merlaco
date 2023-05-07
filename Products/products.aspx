@@ -14,29 +14,27 @@
     </asp:LoginView>
     <asp:ListView ID="ListView1" runat="server" DataKeyNames="barcode" DataSourceID="Products_datasource" GroupItemCount="3"  OnSelectedIndexChanged="AddItemToCart_Click">
         <AlternatingItemTemplate>
-            <td runat="server" style="background-color: #FAFAD2;color: #284775;">
+            <td id="Td1" runat="server" style="background-color: white;color: black;width:25vw;border-width:5px;border-color:#e9eef2;border-style:solid;padding:10px;">
                 <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
-                <br />name:
-                <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                <br />price:
-                <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
-                <br />Details:
+                <br />
+                <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' Font-Bold="True" Height="40" />
+                <br />
+                <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") + " kr" %>' Height="30" />
+                <br />
                 <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
                 <br />
                 <asp:LoginView ID="LoginView2" runat="server">
                     <RoleGroups>
                         <asp:RoleGroup Roles="customer">
-                            <ContentTemplate>
-                            Add to Cart:
+                          <ContentTemplate>
                             <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
                             <br />
-                            </ContentTemplate>
+                          </ContentTemplate>
                         </asp:RoleGroup>
 
                         <asp:RoleGroup Roles="admin">
                             <ContentTemplate>
-                            Active product:
-                            <asp:Label ID="priceLabel" runat="server" Text='<%# (bool)Eval("active") ? "yes" : "no" %>' />
+                            <asp:Label ID="priceLabel" runat="server" Text='<%# (bool)Eval("active") ? "Active product" : "Inactive product" %>' ForeColor="#999999" Height="30" />
                             <br />
                             </ContentTemplate>
                         </asp:RoleGroup>
@@ -52,7 +50,7 @@
             </table>
         </EmptyDataTemplate>
         <EmptyItemTemplate>
-<td runat="server" />
+<td runat="server" style="background-color: white;color: black;width:25vw;border-width:5px;border-color:#e9eef2;border-style:solid;padding:10px;"/>
         </EmptyItemTemplate>
         <GroupTemplate>
             <tr id="itemPlaceholderContainer" runat="server">
@@ -60,20 +58,19 @@
             </tr>
         </GroupTemplate>
         <ItemTemplate>
-            <td runat="server" style="background-color: #FFFBD6;color: #333333;">
+            <td runat="server" style="background-color: white;color: black;width:25vw;border-width:5px;border-color:#e9eef2;border-style:solid;padding:10px;">
                 <asp:Image ID="image" runat="server" ImageUrl='<%# Eval("picture").ToString() == "" ? "~/images/Products/NoImage.png" : Eval("picture") %>' AlternateText="Product Image"/>
-                <br />name:
-                <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
-                <br />price:
-                <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
-                <br />Details:
+                <br />
+                <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' Font-Bold="True" Height="40" />
+                <br />
+                <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") + " kr" %>' Height="30" />
+                <br />
                 <asp:Button ID="btn" runat="server" Text="Details" PostBackUrl='<%# String.Format("products_info.aspx?bc={0}", Eval("barcode")) %>' />
                 <br />
                 <asp:LoginView ID="LoginView2" runat="server">
                     <RoleGroups>
                         <asp:RoleGroup Roles="customer">
                           <ContentTemplate>
-                            Add to Cart:
                             <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
                             <br />
                           </ContentTemplate>
@@ -81,8 +78,7 @@
 
                         <asp:RoleGroup Roles="admin">
                             <ContentTemplate>
-                            Active product:
-                            <asp:Label ID="priceLabel" runat="server" Text='<%# (bool)Eval("active") ? "yes" : "no" %>' />
+                            <asp:Label ID="priceLabel" runat="server" Text='<%# (bool)Eval("active") ? "Active product" : "Inactive product" %>' ForeColor="#999999" Height="30" />
                             <br />
                             </ContentTemplate>
                         </asp:RoleGroup>
@@ -94,14 +90,14 @@
             <table runat="server">
                 <tr runat="server">
                     <td runat="server">
-                        <table id="groupPlaceholderContainer" runat="server" border="1" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                        <table id="groupPlaceholderContainer" runat="server" border="1" style="text-align: center;background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
                             <tr id="groupPlaceholder" runat="server">
                             </tr>
                         </table>
                     </td>
                 </tr>
                 <tr runat="server">
-                    <td runat="server" style="text-align: center;background-color: #FFCC66;font-family: Verdana, Arial, Helvetica, sans-serif;color: #333333;">
+                    <td runat="server" style="text-align: center;background-color: white;color: black;border-width:5px;border-color:#e9eef2;border-style:solid;padding:10px;font-family: Verdana, Arial, Helvetica, sans-serif;color: black;">
                         <asp:DataPager ID="DataPager1" runat="server" PageSize="12">
                             <Fields>
                                 <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />

@@ -29,7 +29,7 @@
                 <asp:LoginView ID="LoginView1" runat="server">
                     <AnonymousTemplate>
                         <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="AnonymousSiteMap" runat="server" />
-                        <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
+                        <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="3" Font-Size="X-Large" ForeColor="White" HoverNodeStyle-BackColor="#F3F3F3" SelectedNodeStyle-BackColor="#F3F3F3">
                             <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
                             <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
                             <ParentNodeStyle Font-Bold="False" />
@@ -40,7 +40,7 @@
                         <asp:RoleGroup Roles="customer">
                             <ContentTemplate>
                                 <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="CustomerSitemap" runat="server" />
-                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
+                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="3" Font-Size="X-Large" ForeColor="White" HoverNodeStyle-BackColor="#F3F3F3" SelectedNodeStyle-BackColor="#F3F3F3">
                                     <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
                                     <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
                                     <ParentNodeStyle Font-Bold="False" />
@@ -51,7 +51,7 @@
                         <asp:RoleGroup Roles="picker">
                             <ContentTemplate>
                                 <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="PickerSiteMap" runat="server" />
-                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
+                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="3" Font-Size="X-Large" ForeColor="White" HoverNodeStyle-BackColor="#F3F3F3" SelectedNodeStyle-BackColor="#F3F3F3">
                                     <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
                                     <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
                                     <ParentNodeStyle Font-Bold="False" />
@@ -62,11 +62,10 @@
                         <asp:RoleGroup Roles="admin">
                             <ContentTemplate>
                                 <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="AdminSiteMap" runat="server" />
-                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="2" Font-Size="X-Large" Font-Bold="True" ForeColor="White" ImageSet="Arrows">
-                                    <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
-                                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
-                                    <ParentNodeStyle Font-Bold="False" />
-                                    <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="3" Font-Size="X-Large" ForeColor="White" HoverNodeStyle-BackColor="#F3F3F3" SelectedNodeStyle-BackColor="#F3F3F3">
+                                    <HoverNodeStyle Font-Underline="False" />
+                                    <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="10" VerticalPadding="3" />
+                                    <SelectedNodeStyle Font-Underline="False" HorizontalPadding="10" VerticalPadding="3" Font-Bold="True" />
                                 </asp:TreeView>
                             </ContentTemplate>
                         </asp:RoleGroup>
@@ -79,7 +78,7 @@
             </div>
         </div>
         <div id="footer">
-            <a href="mailto:test@via.dk">DEVELOPER: Iacopo Ermacora and Merlin Meyer</a>
+            <a href="mailto:test@via.dk" style="color: white;">Made with <3 by Iacopo Ermacora and Merlin Meyer</a>
         </div>
     </form>
 </body>
