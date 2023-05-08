@@ -20,6 +20,7 @@ public partial class Users_modify_user : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            //Load from the dataase all the data for the user that has to be modified
             string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
             SqlConnection Conn = new SqlConnection(dbstring);
@@ -79,8 +80,7 @@ public partial class Users_modify_user : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a booking. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statement to update a user
         string sqlStr = "UPDATE Users SET name = @Thename, surname = @Thesurname, IBAN = @TheIBAN, phone = @Thephone, date_of_birth = @Thedate_of_birth, address = @Theaddress, picture = @Thepicture WHERE username = @Theusername";
 
         // Open the database connection
@@ -89,6 +89,7 @@ public partial class Users_modify_user : System.Web.UI.Page
         // Create an executable SQL command containing our SQL statement and the database connection
         SqlCommand sqlCmd = new SqlCommand(sqlStr, con);
 
+        //Set the username for the parameters based on the user role (non-admin can only modify their data)
         string theusr;
 
         if (User.IsInRole("admin"))
@@ -140,7 +141,7 @@ public partial class Users_modify_user : System.Web.UI.Page
         // Close the connection to the database
         con.Close();
 
-        // Show the user that the booking has been added
+        // Show the user that the user has been added
         resultLabel.Text = "User modified";
 
     }

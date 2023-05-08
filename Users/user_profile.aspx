@@ -29,6 +29,7 @@
                 <asp:RoleGroup Roles="customer">
                   <ContentTemplate>
                     <asp:Button ID="EditUserButton" runat="server" Text="Edit User" />
+                    <asp:Button ID="DeleteUserButton" runat="server" Text="Delete User" OnClick="OnClick_delete_user" />
                   </ContentTemplate>
                 </asp:RoleGroup>
 

@@ -27,6 +27,7 @@ public partial class Products_products_info : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Retrieve from the database all the data displayed in the page, based on the querystring that indicates the desired product barcode
         string product_bc = Request.QueryString["bc"];
 
         string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -61,6 +62,7 @@ public partial class Products_products_info : System.Web.UI.Page
 
         Conn.Close();
 
+        //If the user is admin, set the link for the editproductbutton
         if (User.IsInRole("admin"))
         {
             Button btn = (Button)LoginView2.FindControl("EditProductButton");
@@ -76,8 +78,7 @@ public partial class Products_products_info : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a booking. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statement to update a product state (active/inactive)
         string sqlStr_o = "UPDATE Product SET active = ~active WHERE barcode = @theBarcode";
 
         // Open the database connection

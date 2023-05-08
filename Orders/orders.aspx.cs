@@ -14,7 +14,7 @@ public partial class Orders_Orders : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        //Based on the role of the user, select the correct data from the database
         if (User.IsInRole("admin"))
         {
             Orders_datasource.SelectCommand = "SELECT [Order].[order_number], [Order].[date], [Order_picker].[picker], [Order_picker].[picked], SUM([Order].[quantity]) as N_items FROM [Order], [Order_picker] WHERE [Order].[order_number] = [Order_picker].[order_number] GROUP BY [Order].[order_number],  [Order_picker].[picker], [Order_picker].[picked], [Order].[date]";
@@ -29,16 +29,6 @@ public partial class Orders_Orders : System.Web.UI.Page
         }
     }
 
-    protected void lstView_ItemCommand(object sender, ListViewCommandEventArgs e)
-    {
-        // save button Clicked
-        if (e.CommandName == "ButtonClick")
-        {
-            ListViewItem itemClicked = e.Item;
-            // Find Controls/Retrieve values from the item  here
-        }
-    }
-
     protected void DeleteOrderButton_Click(object sender, EventArgs e)
     {
         // Gets the default connection string/path to our database from the web.config file
@@ -47,8 +37,7 @@ public partial class Orders_Orders : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a booking. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statements to delete an order
         string sqlStr_o = "DELETE FROM [Order] WHERE order_number = @theOrderNumber";
         string sqlStr_op = "DELETE FROM order_picker WHERE order_number = @theOrderNumber";
 
@@ -79,6 +68,7 @@ public partial class Orders_Orders : System.Web.UI.Page
 
     protected void Picker_checkChanged(object sender, EventArgs e)
     {
+        //Check which row of the listview had an interaction with the checkbox and retrieve the data related to that row
         CheckBox checkhome = (CheckBox)sender;
         LoginView loginView = (LoginView)checkhome.NamingContainer;
         ListViewItem item = (ListViewItem)loginView.NamingContainer;
@@ -91,8 +81,7 @@ public partial class Orders_Orders : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a user. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statement to update an order
         string sqlStr = "UPDATE order_picker SET picked = @thePicked WHERE order_number = @theOrder_number";
 
         // Open the database connection
@@ -110,6 +99,7 @@ public partial class Orders_Orders : System.Web.UI.Page
         // Close the connection to the database
         con.Close();
 
+        //Reload the page
         Response.Redirect(Request.RawUrl);
     }
 }

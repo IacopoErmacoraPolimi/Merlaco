@@ -21,7 +21,7 @@ public partial class Users_user_profile : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //Select from the database the data of the user whose profile we want to display
         string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
         SqlConnection Conn = new SqlConnection(dbstring);
@@ -32,6 +32,7 @@ public partial class Users_user_profile : System.Web.UI.Page
 
         Conn.Open();
 
+        //Select the username based on the role of the user
         if (User.IsInRole("admin"))
         {
             if (Request.QueryString["u"] != null)
@@ -79,8 +80,7 @@ public partial class Users_user_profile : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a booking. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statement to delete (or better, deactivate) a user
         string sqlStr = "UPDATE aspnet_Membership SET IsApproved = 0 WHERE UserId IN (SELECT UserId FROM aspnet_Users WHERE UserName = @theUsername)";
 
         // Open the database connection
@@ -97,6 +97,17 @@ public partial class Users_user_profile : System.Web.UI.Page
         // Close the connection to the database
         con.Close();
 
-        Response.Redirect(Request.RawUrl);
+        //Logout the user if deleted himself, otherwise reload the page
+        if (User.IsInRole("customer"))
+        {
+            FormsAuthentication.SignOut();
+            Response.Cookies.Clear();
+
+            Response.Redirect("/WEE_Project/Products/products.aspx");
+        }
+        else
+        {
+            Response.Redirect(Request.RawUrl);
+        }
     }
 }

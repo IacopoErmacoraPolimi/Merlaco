@@ -4,7 +4,7 @@
     <link href="StyleSheet.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div id="image-block">
+    <div id="image-block" style="margin-left:70px;">
         <asp:Image ID="image" runat="server" AlternateText="Product Image"/>
     </div>
     <div id="data-block">
@@ -39,6 +39,6 @@
         </asp:LoginView>
 
     </div>
-    <p><b style="color:#545454;">Description:</b> <%= description %></p>
+    <p style="margin-left:70px;"><b style="color:#545454;">Description:</b> <%= description %></p>
 </asp:Content>
 

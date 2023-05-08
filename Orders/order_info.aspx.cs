@@ -12,12 +12,14 @@ public partial class Orders_order_info : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Select the order number from the query and retrieve the data for the listview from the database based on the order number
         string order_num = Request.QueryString["o"];
         Order_info_datasource.SelectCommand = "SELECT [Order].[order_number], [Product].[name], [Order].[product_bar_code], [quantity], [Product].[place], [Product].[alternative], [Order].[picked] FROM [Order], [Product] WHERE [Order].[product_bar_code] = [Product].[barcode] AND [Order].[order_number] = '" + order_num + "'";
     }
 
     protected void Picker_checkChanged(object sender, EventArgs e)
     {
+        //Check which row of the listview had an interaction with the checkbox and retrieve the data related to that row
         CheckBox checkhome = (CheckBox)sender;
         LoginView loginView = (LoginView)checkhome.NamingContainer;
         ListViewItem item = (ListViewItem)loginView.NamingContainer;
@@ -32,8 +34,7 @@ public partial class Orders_order_info : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a user. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statement Update the selected order
         string sqlStr = "UPDATE [Order] SET picked = @thePicked WHERE order_number = @theOrder_number AND product_bar_code = @theProduct_bar_code";
 
         // Open the database connection
@@ -42,6 +43,7 @@ public partial class Orders_order_info : System.Web.UI.Page
         // Create an executable SQL command containing our SQL statement and the database connection
         SqlCommand sqlCmd = new SqlCommand(sqlStr, con);
 
+        //Create the parameters for the query
         sqlCmd.Parameters.AddWithValue("@thePicked", checkhome.Checked);
         sqlCmd.Parameters.AddWithValue("@theOrder_number", ord_num);
         sqlCmd.Parameters.AddWithValue("@theProduct_bar_code", prod_bc);
@@ -52,6 +54,7 @@ public partial class Orders_order_info : System.Web.UI.Page
         // Close the connection to the database
         con.Close();
 
+        //Reload the page to update the data
         Response.Redirect(Request.RawUrl);
     }
     

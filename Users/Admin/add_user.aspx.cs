@@ -28,11 +28,11 @@ public partial class Users_add_user : System.Web.UI.Page
             // Bind the DropDownList object and its datasource to the actual DropDownList in my page
             theRoles.DataBind();
 
-            // Run through the list of roles. If a "Student" role exist, then make that the start value in the DropDownList. 
-            // If someone forgets to change the role it's better to create too many students than admins.
+            // Run through the list of roles. If a "customer" role exist, then make that the start value in the DropDownList. 
+            // If someone forgets to change the role it's better to create too many customers than admins.
             for (int i = 0; i < theRoles.Items.Count; i++)
             {
-                if ((theRoles.Items[i].Value).Equals("Student"))
+                if ((theRoles.Items[i].Value).Equals("customer"))
                 {
                     theRoles.SelectedIndex = i;
                 }

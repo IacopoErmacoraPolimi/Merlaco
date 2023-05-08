@@ -18,14 +18,22 @@
         <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
 
         <ul>
-            <li><a href="Products/products.aspx">Merlaco</a></li>
-            <li style="float: right"><a class="active" href="/WEE_Project/Cart/cart.aspx"><i class="bi bi-basket"></i></a></li>
+            <li><a href="/WEE_Project/Products/products.aspx">Merlaco</a></li>
+            <asp:LoginView ID="LoginView2" runat="server">
+                <RoleGroups>
+                    <asp:RoleGroup Roles="customer">
+                        <ContentTemplate>
+                            <li style="float: right"><a class="active" href="/WEE_Project/Cart/cart.aspx"><i class="bi bi-basket"></i></a></li>
+                        </ContentTemplate>
+                    </asp:RoleGroup>
+                </RoleGroups>
+            </asp:LoginView>
             <li style="float: right">
                 <asp:LoginStatus ID="LoginStatus2" runat="server" />
             </li>
         </ul>
         <div class="inline-div">
-            <div id="sideBar">
+            <div id="sideBar" style="height:100%;">
                 <asp:LoginView ID="LoginView1" runat="server">
                     <AnonymousTemplate>
                         <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="AnonymousSiteMap" runat="server" />
@@ -62,7 +70,7 @@
                         <asp:RoleGroup Roles="admin">
                             <ContentTemplate>
                                 <asp:SiteMapDataSource ID="SiteMapDataSource1" SiteMapProvider="AdminSiteMap" runat="server" />
-                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="3" Font-Size="X-Large" ForeColor="White" HoverNodeStyle-BackColor="#F3F3F3" SelectedNodeStyle-BackColor="#F3F3F3">
+                                <asp:TreeView ID="TreeView" DataSourceID="SiteMapDataSource1" runat="server" Orientation="Horizontal" StaticDisplayLevels="3" Font-Size="X-Large" ForeColor="White" HoverNodeStyle-BackColor="#F3F3F3" SelectedNodeStyle-BackColor="#F3F3F3" style="height:100%;">
                                     <HoverNodeStyle Font-Underline="False" />
                                     <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="10" VerticalPadding="3" />
                                     <SelectedNodeStyle Font-Underline="False" HorizontalPadding="10" VerticalPadding="3" Font-Bold="True" />
@@ -78,7 +86,7 @@
             </div>
         </div>
         <div id="footer">
-            <a href="mailto:test@via.dk" style="color: white;">Made with <3 by Iacopo Ermacora and Merlin Meyer</a>
+            <a href="mailto:335141@via.dk,335069@via.dk" style="color: white;">Made with <3 by Iacopo Ermacora and Merlin Meyer</a>
         </div>
     </form>
 </body>

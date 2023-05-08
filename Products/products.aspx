@@ -3,7 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <asp:LoginView ID="LoginView2" runat="server">
+    <div style="text-align:right;width:75vw;margin-top:20px;margin-bottom:15px;">
+        <p style="margin:20px" id="MessageCart" runat="server"></p>
+        <asp:LoginView ID="LoginView2" runat="server">
         <RoleGroups>
             <asp:RoleGroup Roles="admin">
                 <ContentTemplate>
@@ -12,6 +14,7 @@
             </asp:RoleGroup>
         </RoleGroups>
     </asp:LoginView>
+    </div>
     <asp:ListView ID="ListView1" runat="server" DataKeyNames="barcode" DataSourceID="Products_datasource" GroupItemCount="3"  OnSelectedIndexChanged="AddItemToCart_Click">
         <AlternatingItemTemplate>
             <td id="Td1" runat="server" style="background-color: white;color: black;width:25vw;border-width:5px;border-color:#e9eef2;border-style:solid;padding:10px;">
@@ -27,7 +30,7 @@
                     <RoleGroups>
                         <asp:RoleGroup Roles="customer">
                           <ContentTemplate>
-                            <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
+                            <asp:Button ID="AddToCartButton" runat="server" Text='<%# (int)Eval("quantity_in_stock") > 0 ? "Add To Cart" : "Out of stock" %>' CommandName="select" />
                             <br />
                           </ContentTemplate>
                         </asp:RoleGroup>
@@ -71,7 +74,7 @@
                     <RoleGroups>
                         <asp:RoleGroup Roles="customer">
                           <ContentTemplate>
-                            <asp:Button ID="AddToCartButton" runat="server" Text="Add To Cart" CommandName="select" />
+                            <asp:Button ID="AddToCartButton" runat="server" Enabled='<%# (int)Eval("quantity_in_stock") > 0 ? true : false %>' Text='<%# (int)Eval("quantity_in_stock") > 0 ? "Add To Cart" : "Out of stock" %>' CommandName="select" />
                             <br />
                           </ContentTemplate>
                         </asp:RoleGroup>

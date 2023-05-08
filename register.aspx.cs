@@ -14,7 +14,11 @@ public partial class Access_Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //If the user is already logged in redirect him to the error page
+        if (User.Identity.IsAuthenticated)
+        {
+            Response.Redirect("error/genericerror.aspx");
+        }
     }
 
     protected void CreateUserWizard1_CreatedUser(object sender, EventArgs e)

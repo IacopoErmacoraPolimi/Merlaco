@@ -35,12 +35,11 @@ li a:hover:not(.active) {
 
 #sideBar {
     background-color:white;
-    min-height: 90vh;
     padding: 0px;
     max-width: 20vw;
     min-width: 20vw;
     display:inline-block;
-    vertical-align: top;
+    min-height: 90vh;
 }
 
 #mainContent {

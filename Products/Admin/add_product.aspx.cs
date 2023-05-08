@@ -23,8 +23,7 @@ public partial class Products_add_product : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a booking. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statement to insert a new product
         string sqlStr = "INSERT INTO Product (barcode, name, picture, origin, eco_or_not, quantity_in_stock, description, price, place, alternative) VALUES (@Thebarcode, @Thename, @Thepicture, @Theorigin, @Theeco_or_not, @Thequantity_in_stock, @Thedescription, @Theprice, @Theplace, @Thealternative)";
 
         // Open the database connection
@@ -33,8 +32,7 @@ public partial class Products_add_product : System.Web.UI.Page
         // Create an executable SQL command containing our SQL statement and the database connection
         SqlCommand sqlCmd = new SqlCommand(sqlStr, con);
 
-        //Find out which path to store in the DB for the images of the conference room. First set it
-        //to the default value
+        //Find out which path to store in the DB for the images of the product. 
         string filePath = "~/images/Products/NoImage.png";
 
         //Check if the user has selected an image file that should be used instead of the default
@@ -73,7 +71,7 @@ public partial class Products_add_product : System.Web.UI.Page
         // Close the connection to the database
         con.Close();
 
-        // Show the user that the booking has been added
+        // Show the user that the product has been added
         resultLabel.Text = "Product added";
 
     }

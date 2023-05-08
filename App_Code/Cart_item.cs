@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-/// <summary>
-/// Summary description for Cart_item
-/// </summary>
+//Class for session-based cart
 public class Cart_item
 {
 
@@ -16,8 +14,5 @@ public class Cart_item
 
 	public Cart_item()
 	{
-		//
-		// TODO: Add constructor logic here
-		//
 	}
 }

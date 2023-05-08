@@ -21,21 +21,28 @@ public partial class Products_modify_product : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            // Gets the default connection string/path to our database from the web.config file
             string dbstring = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
+            // Creates a connection to our database
             SqlConnection Conn = new SqlConnection(dbstring);
 
+            // The SQL statement to select the data from the product the user wants to modify.
             string sqlStr = "SELECT * FROM [Product] WHERE [barcode] = @theBarcode";
 
+            // Create an executable SQL command containing our SQL statement and the database connection
             SqlCommand Comm1 = new SqlCommand(sqlStr, Conn);
 
+            //Set the parameter for the query
             string thebc = Request.QueryString["bc"];
             Comm1.Parameters.AddWithValue("@theBarcode", thebc);
 
             Conn.Open();
 
+            //Create a Datareader for the selected data
             SqlDataReader DR1 = Comm1.ExecuteReader();
 
+            //Assign the values to variables accessible from the frontend
             if (DR1.Read())
             {
                 barcode = DR1.GetValue(0).ToString();
@@ -62,8 +69,7 @@ public partial class Products_modify_product : System.Web.UI.Page
         // Creates a connection to our database
         SqlConnection con = new SqlConnection(dbstring);
 
-        // The SQL statement to insert a booking. By using prepared statements,
-        // we automatically get some protection against SQL injection.
+        // The SQL statement to update a product
         string sqlStr = "UPDATE Product SET name = @Thename, picture = @Thepicture, origin = @Theorigin, eco_or_not = @Theeco_or_not, quantity_in_stock = @Thequantity_in_stock, description = @Thedescription, price = @Theprice, place = @Theplace, alternative = @Thealternative WHERE barcode = @Thebarcode";
 
         // Open the database connection
@@ -116,7 +122,7 @@ public partial class Products_modify_product : System.Web.UI.Page
         // Close the connection to the database
         con.Close();
 
-        // Show the user that the booking has been added
+        // Show the user that the product has been added
         resultLabel.Text = "Product modified";
 
     }
