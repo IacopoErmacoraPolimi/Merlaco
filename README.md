@@ -29,6 +29,5 @@ Deploy the project to a web server or hosting platform of your choice for produc
 
 Contact Information
 -
-If you have any questions or inquiries about the project, please contact the team members:  
-Merlin Meyer: ??@??.com. 
+If you have any questions or inquiries about the project, please contact the team members:   
 Iacopo Ermacora: iacopoermacora@gmail.com
